@@ -1,0 +1,1 @@
+export const urlHeroku = "https://node-project-rest-api.herokuapp.com/mannagerseries"
