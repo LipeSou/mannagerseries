@@ -1,6 +1,6 @@
 import { Grid, Button, Typography, ThemeProvider} from '@mui/material';
 import React, { useState } from 'react'
-import { backgroundSecundary, darkTheme } from '../../global/themes';
+import { backgroundSecundary, darkTheme, secundary } from '../../global/themes';
 import ModalCardSeries from '../ModalCardSeries/ModalCardSeries';
 import { ISeries } from '../../interfaces/series';
 
@@ -26,7 +26,7 @@ const CardSeries = ({serie}: {serie: ISeries}) => {
                             sx={{ width: 300, height: 50, marginTop: '1rem', background: backgroundSecundary}}
                             onClick={handleOpen}
                             >
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            <Typography variant="h6" component="div" color={secundary} sx={{ flexGrow: 1 }}>
                                 {serie.name}
                             </Typography>   
                         </Button>

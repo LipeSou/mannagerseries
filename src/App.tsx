@@ -7,6 +7,8 @@ import { urlHeroku } from './global/urls';
 import { ISeries } from './interfaces/series';
 import HeaderSeries from './components/HeaderSeries/HeaderSeries';
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
+import './App.css'
+
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -14,7 +16,9 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: ${backgroundPrimary};
     font-family: Roboto, Helvetica, Sans-Serif;
-    color: white
+    color: white;
+    height: 100vh;
+    width: 100vw;
   }
 `;
 
@@ -33,12 +37,18 @@ const App = () => {
         <GlobalStyle />
         <HeaderSeries />
         {series ? series.map((serie) => {
-          return <CardSeries serie={serie} />
+          return <CardSeries serie={serie} key={serie.id} />
         }) :
           (
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <MovieFilterIcon sx={{ fontSize: 150, color: secundary }} />
+            <div className='container'>
+              <div className="pai">
+                <div className="object">
+                  <MovieFilterIcon sx={{ fontSize: 200, color: secundary }} />
+                </div>
+              </div>
             </div>
+
+
           )}
       </ThemeProvider>
     </>

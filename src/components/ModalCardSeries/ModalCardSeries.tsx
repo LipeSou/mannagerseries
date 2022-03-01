@@ -1,29 +1,21 @@
-import React from "react"
-import { Modal, Box, Typography, FormGroup, FormControlLabel, Checkbox, ThemeProvider } from "@mui/material";
-import { backgroundSecundary, darkTheme, primary } from "../../global/themes";
+import React, { useState } from "react"
+import { Modal, Box, Typography, ThemeProvider, FormControl, Select, MenuItem } from "@mui/material";
+import { darkTheme, secundary } from "../../global/themes";
 import { ISeries } from "../../interfaces/series";
 import moment from "moment";
 import 'moment/locale/pt-br'
+import { styleBox } from "./styled";
 
 export const ModalCardSeries = ({ open, handleClose, serie }: {
     open: boolean,
     handleClose: () => void,
     serie: ISeries
 }) => {
+    const [episodesFinishes, setEpisodesFinishes] = useState<number>(serie.numberFinish || 1)
 
-    const style = {
-        position: 'absolute' as 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: "60vw",
-        height: "70vh",
-        bgcolor: 'background.paper',
-        border: `2px solid ${primary}`,
-        boxShadow: 24,
-        p: 4,
-        overflow: "auto",
-        background: backgroundSecundary
+    const handleChange = (event: any) => {
+        console.log(event.target)
+        setEpisodesFinishes(event.target.value as number);
     };
     return (
         <ThemeProvider theme={darkTheme}>
@@ -33,8 +25,8 @@ export const ModalCardSeries = ({ open, handleClose, serie }: {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
-                    <Typography variant="h5" component="div">
+                <Box sx={styleBox}>
+                    <Typography variant="h5" component="div" color={secundary}>
                         {serie.name}
                     </Typography>
                     <Typography sx={{ mb: 1.5, mt: 2 }} color="text.secondary">
@@ -45,30 +37,32 @@ export const ModalCardSeries = ({ open, handleClose, serie }: {
                     </Typography>
                     <Typography sx={{ mb: 1.5, mt: 2 }} color="text.secondary">
                         Número de episodios
-                    </Typography> 
+                    </Typography>
                     <Typography variant="body2">
                         {serie.numberEpisode}
                     </Typography>
                     <Typography sx={{ mb: 1.5, mt: 2 }} color="text.secondary">
                         Episodios assistidos
                     </Typography>
-                    <FormGroup>
-                        {
-                            Array.from({length : serie.numberEpisode}).map((checkbox, index) => {
-                                return <FormControlLabel 
-                                    control={<Checkbox defaultChecked />} 
-                                    label={<Typography variant="body2">
-                                                {`Episodio ${index + 1}`}
-                                            </Typography>}
-                                    key = {index}
-                                />
-                            })
-                        }
-                    </FormGroup>
+                    <FormControl fullWidth variant="filled">
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={episodesFinishes}
+                            label="Episodios assistidos"
+                            onChange={handleChange}
+                        >
+                            {
+                                Array.from({ length: serie.numberEpisode }).map((checkbox, index) => {
+                                    return <MenuItem value={index + 1} key={index}>{index + 1} </MenuItem>
+                                })
+                            }
+                        </Select>
+                    </FormControl>
                 </Box>
 
             </Modal>
-            </ThemeProvider >
+        </ThemeProvider >
 
     )
 }

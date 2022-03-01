@@ -1,0 +1,28 @@
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pai{
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.object {
+    animation: MoveUpDown 0.8s linear infinite;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+  }
+  
+  @keyframes MoveUpDown {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-100px);
+    }
+  }
