@@ -8,6 +8,7 @@ import { ISeries } from './interfaces/series';
 import HeaderSeries from './components/HeaderSeries/HeaderSeries';
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
 import './App.css'
+import Footer from './components/Footer/Footer';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -38,7 +39,8 @@ const App = () => {
         <HeaderSeries />
         {series ? series.map((serie) => {
           return <CardSeries serie={serie} key={serie.id} />
-        }) :
+        })
+          :
           (
             <div className='container'>
               <div className="pai">
@@ -47,9 +49,8 @@ const App = () => {
                 </div>
               </div>
             </div>
-
-
           )}
+          <Footer />
       </ThemeProvider>
     </>
   );
